@@ -119,11 +119,11 @@ def extra(pytestconfig):
 
     .. code-block:: python
 
-        import pytest_html
+        import pytest_html_cn
 
 
         def test_foo(extra):
-            extra.append(pytest_html.extras.url("http://www.example.com/"))
+            extra.append(pytest_html_cn.extras.url("http://www.example.com/"))
     """
     pytestconfig.extras = []
     yield pytestconfig.extras

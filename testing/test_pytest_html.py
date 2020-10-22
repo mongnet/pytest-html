@@ -248,7 +248,7 @@ class TestHTML:
         assert result.ret == 0
 
         content = pkg_resources.resource_string(
-            "pytest_html", os.path.join("resources", "style.css")
+            "pytest_html_cn", os.path.join("resources", "style.css")
         )
         content = content.decode("utf-8")
         assert content
@@ -260,7 +260,7 @@ class TestHTML:
         assert result.ret == 0
 
         content = pkg_resources.resource_string(
-            "pytest_html", os.path.join("resources", "main.js")
+            "pytest_html_cn", os.path.join("resources", "main.js")
         )
         content = content.decode("utf-8")
         assert content
@@ -314,7 +314,7 @@ class TestHTML:
                 outcome = yield
                 report = outcome.get_result()
                 if report.when == 'call':
-                    from pytest_html import extras
+                    from pytest_html_cn import extras
                     report.extra = [extras.html('<div>{content}</div>')]
         """
         )
@@ -336,7 +336,7 @@ class TestHTML:
                 outcome = yield
                 report = outcome.get_result()
                 if report.when == 'call':
-                    from pytest_html import extras
+                    from pytest_html_cn import extras
                     report.extra = [extras.text({content})]
         """
         )
@@ -357,7 +357,7 @@ class TestHTML:
                 outcome = yield
                 report = outcome.get_result()
                 if report.when == 'call':
-                    from pytest_html import extras
+                    from pytest_html_cn import extras
                     report.extra = [extras.json({content})]
         """
         )
@@ -380,7 +380,7 @@ class TestHTML:
                 outcome = yield
                 report = outcome.get_result()
                 if report.when == 'call':
-                    from pytest_html import extras
+                    from pytest_html_cn import extras
                     report.extra = [extras.url('{content}')]
         """
         )
@@ -409,7 +409,7 @@ class TestHTML:
                 outcome = yield
                 report = outcome.get_result()
                 if report.when == 'call':
-                    from pytest_html import extras
+                    from pytest_html_cn import extras
                     report.extra = [extras.{extension}('{content}')]
         """
         )
@@ -420,7 +420,7 @@ class TestHTML:
         assert f'<img src="{src}"/>' in html
 
     def test_extra_image_windows(self, mocker, testdir):
-        mock_isfile = mocker.patch("pytest_html.plugin.isfile")
+        mock_isfile = mocker.patch("pytest_html_cn.plugin.isfile")
         mock_isfile.side_effect = ValueError("stat: path too long for Windows")
         self.test_extra_image(testdir, "image/png", "png")
         assert mock_isfile.call_count == 1
@@ -436,7 +436,7 @@ class TestHTML:
                 outcome = yield
                 report = outcome.get_result()
                 if report.when == 'call':
-                    from pytest_html import extras
+                    from pytest_html_cn import extras
                     report.extra = [extras.{extension}('{content}')]
         """
         )
@@ -449,7 +449,7 @@ class TestHTML:
         )
 
     def test_extra_video_windows(self, mocker, testdir):
-        mock_isfile = mocker.patch("pytest_html.plugin.isfile")
+        mock_isfile = mocker.patch("pytest_html_cn.plugin.isfile")
         mock_isfile.side_effect = ValueError("stat: path too long for Windows")
         self.test_extra_video(testdir, "video/mp4", "mp4")
         assert mock_isfile.call_count == 1
@@ -466,7 +466,7 @@ class TestHTML:
                 outcome = yield
                 report = outcome.get_result()
                 if report.when == 'call':
-                    from pytest_html import extras
+                    from pytest_html_cn import extras
                     report.extra = [extras.text({content})]
         """
         )
@@ -492,7 +492,7 @@ class TestHTML:
                 outcome = yield
                 report = outcome.get_result()
                 if report.when == 'call':
-                    from pytest_html import extras
+                    from pytest_html_cn import extras
                     report.extra = [extras.{extra_type}('{content}')]
         """
         )
@@ -520,7 +520,7 @@ class TestHTML:
                 outcome = yield
                 report = outcome.get_result()
                 if report.when == 'call':
-                    from pytest_html import extras
+                    from pytest_html_cn import extras
                     report.extra = [extras.{extra_type}('{content}')]
         """
         )
@@ -554,7 +554,7 @@ class TestHTML:
                 outcome = yield
                 report = outcome.get_result()
                 if report.when == 'call':
-                    from pytest_html import extras
+                    from pytest_html_cn import extras
                     report.extra = [extras.image('{content}')]
         """
         )
@@ -575,7 +575,7 @@ class TestHTML:
                 outcome = yield
                 report = outcome.get_result()
                 if report.when == 'call':
-                    from pytest_html import extras
+                    from pytest_html_cn import extras
                     report.extra = [extras.image('image.png')]
         """
         )
@@ -610,7 +610,7 @@ class TestHTML:
         testdir.makepyfile(
             f"""
             def test_pass(extra):
-                from pytest_html import extras
+                from pytest_html_cn import extras
                 extra.append(extras.png('{content}'))
         """
         )
@@ -628,7 +628,7 @@ class TestHTML:
                 outcome = yield
                 report = outcome.get_result()
                 if report.when == 'call':
-                    from pytest_html import extras
+                    from pytest_html_cn import extras
                     report.extra = [extras.image('image.png')]
         """
         )
@@ -813,7 +813,7 @@ class TestHTML:
     )
     def test_ansi_color(self, testdir, mocker, with_ansi):
         if not with_ansi:
-            mock_ansi_support = mocker.patch("pytest_html.plugin.ansi_support")
+            mock_ansi_support = mocker.patch("pytest_html_cn.plugin.ansi_support")
             mock_ansi_support.return_value = None
 
         pass_content = [

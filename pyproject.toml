@@ -1,5 +1,21 @@
+[tool.poetry]
+name = "pytest_html_cn"
+version = "0.1.0"
+description = "pytest-html中文版"
+authors = ["hubiao <250021520@qq.com>"]
+license = "MIT"
+keywords = ["pytest-html", "pytest", "pytest-html-cn"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+[tool.poetry.dev-dependencies]
+
 [build-system]
-requires = [
-  "setuptools>=50.3.2",
-]
-build-backend = "setuptools.build_meta"
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
+[[tool.poetry.source]]
+name = "aliyun"
+url = "http://mirrors.aliyun.com/pypi/simple/"
+default = true
