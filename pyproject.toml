@@ -8,10 +8,10 @@ keywords = ["pytest-html", "pytest", "pytest-html-cn"]
 
 [tool.poetry.dependencies]
 python = "^3.6"
-pytest = "^6.1.1"
+pytest = "^5.4.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "^6.1.1"
+pytest = "^6.0.0"
 
 [[tool.poetry.source]]
 name = "aliyun"
