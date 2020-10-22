@@ -130,13 +130,13 @@ div.video video {
 	display: none;
 }
 .expander::after {
-	content: " (show details)";
+	content: " (展开详情)";
 	color: #BBB;
 	font-style: italic;
 	cursor: pointer;
 }
 .collapser::after {
-	content: " (hide details)";
+	content: " (隐藏详情)";
 	color: #BBB;
 	font-style: italic;
 	cursor: pointer;

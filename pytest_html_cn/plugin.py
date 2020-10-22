@@ -316,7 +316,7 @@ class HTMLReport:
 
             if len(log) == 0:
                 log = html.div(class_="empty log")
-                log.append("No log output captured.")
+                log.append("未捕获到日志")
             additional_html.append(log)
 
         def _make_media_html_div(
@@ -452,7 +452,7 @@ class HTMLReport:
             html_css = html.style(raw(self.style_css))
 
         head = html.head(
-            html.meta(charset="utf-8"), html.title("Test Report"), html_css
+            html.meta(charset="utf-8"), html.title("自动化测试报告"), html_css
         )
 
         class Outcome:
@@ -489,21 +489,21 @@ class HTMLReport:
                 )
 
         outcomes = [
-            Outcome("passed", self.passed),
-            Outcome("skipped", self.skipped),
-            Outcome("failed", self.failed),
-            Outcome("error", self.errors, label="errors"),
-            Outcome("xfailed", self.xfailed, label="expected failures"),
-            Outcome("xpassed", self.xpassed, label="unexpected passes"),
+            Outcome("passed", self.passed, label="通过"),
+            Outcome("skipped", self.skipped, label="跳过"),
+            Outcome("failed", self.failed, label="失败"),
+            Outcome("error", self.errors, label="错误"),
+            Outcome("xfailed", self.xfailed, label="预期失败"),
+            Outcome("xpassed", self.xpassed, label="预期通过"),
         ]
 
         if self.rerun is not None:
-            outcomes.append(Outcome("rerun", self.rerun))
+            outcomes.append(Outcome("重跑", self.rerun))
 
         summary = [
-            html.p(f"{numtests} tests ran in {suite_time_delta:.2f} seconds. "),
+            html.p(f"共执行 {numtests} 条用例,耗时 {suite_time_delta:.2f} 秒. "),
             html.p(
-                "(Un)check the boxes to filter the results.",
+                "(取消)勾选复选框, 以便筛选测试结果",
                 class_="filter",
                 hidden="true",
             ),
@@ -516,15 +516,15 @@ class HTMLReport:
                 summary.append(", ")
 
         cells = [
-            html.th("Result", class_="sortable result initial-sort", col="result"),
-            html.th("Test", class_="sortable", col="name"),
-            html.th("Duration", class_="sortable numeric", col="duration"),
-            html.th("Links", class_="sortable links", col="links"),
+            html.th("通过/失败", class_="sortable result initial-sort", col="result"),
+            html.th("用例", class_="sortable", col="name"),
+            html.th("耗时", class_="sortable numeric", col="duration"),
+            html.th("链接", class_="sortable links", col="links"),
         ]
         session.config.hook.pytest_html_results_table_header(cells=cells)
 
         results = [
-            html.h2("Results"),
+            html.h2("测试结果"),
             html.table(
                 [
                     html.thead(
@@ -532,7 +532,7 @@ class HTMLReport:
                         html.tr(
                             [
                                 html.th(
-                                    "No results found. Try to check the filters",
+                                    "无测试结果, 试着选择其他测试结果条件",
                                     colspan=len(cells),
                                 )
                             ],
@@ -557,10 +557,10 @@ class HTMLReport:
             html.script(raw(main_js)),
             html.h1(self.title),
             html.p(
-                "Report generated on {} at {} by ".format(
-                    generated.strftime("%d-%b-%Y"), generated.strftime("%H:%M:%S")
+                "测试报告生成于 {}  {} by ".format(
+                    generated.strftime("%Y-%m-%d"), generated.strftime("%H:%M:%S")
                 ),
-                html.a("pytest-html", href=__pypi_url__),
+                html.a("pytest-html-cn版本", href=__pypi_url__),
                 f" v{__version__}",
             ),
             onLoad="init()",
@@ -572,7 +572,7 @@ class HTMLReport:
         session.config.hook.pytest_html_results_summary(
             prefix=summary_prefix, summary=summary, postfix=summary_postfix
         )
-        body.extend([html.h2("Summary")] + summary_prefix + summary + summary_postfix)
+        body.extend([html.h2("用例统计")] + summary_prefix + summary + summary_postfix)
 
         body.extend(results)
 
@@ -589,7 +589,7 @@ class HTMLReport:
             return []
 
         metadata = config._metadata
-        environment = [html.h2("Environment")]
+        environment = [html.h2("测试环境")]
         rows = []
 
         keys = [k for k in metadata.keys()]
